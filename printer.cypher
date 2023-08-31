@@ -67,8 +67,8 @@ CALL {
         ELSE 0
     END AS isWinningMove, // 2 means it's my win, 1 means that opponent wins in next move
     CASE
-        WHEN myScore = 3 AND ((openEnded = 1 AND candidate <> end) OR (openEnded = 2 AND candidate <> start) OR (openEnded = 3)) THEN 2
-        WHEN otherScore = 3 AND  openEnded = 1 THEN 1
+        WHEN myScore = 3 AND ((openEnded = 1 AND candidate <> end) OR (openEnded = 2 AND candidate <> start) OR openEnded = 3) THEN 2
+        WHEN otherScore = 3 AND ((openEnded = 1 AND candidate <> end) OR (openEnded = 2 AND candidate <> start) OR openEnded = 3) THEN 1
         ELSE 0
     END AS isThreeWinningMove, 
     CASE
@@ -137,4 +137,3 @@ WITH candidate ORDER BY score DESC LIMIT 1
 SET candidate.state = $symbol
 
 // x-9
-// 11-x
