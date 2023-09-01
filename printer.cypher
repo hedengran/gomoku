@@ -38,17 +38,17 @@ CALL {
 
     WITH *,
         CASE
-        WHEN before_start.state IS NULL AND end.state IS NULL THEN 1
-        WHEN start.state IS NULL AND after_end.state IS NULL THEN 2
-        WHEN before_start.state IS NULL AND after_end.state IS NULL THEN 3
+        WHEN before_start IS NOT NULL AND before_start.state IS NULL AND end.state IS NULL THEN 1
+        WHEN start.state IS NULL AND after_end IS NOT NULL AND after_end.state IS NULL THEN 2
+        WHEN before_start IS NOT NULL AND before_start.state IS NULL AND after_end IS NOT NULL AND after_end.state IS NULL THEN 3
         ELSE 0
         END AS openEnded
 
     WITH *,
         CASE
-        WHEN before_start.state IS NULL AND end.state IS NULL THEN 1
-        WHEN start.state IS NULL AND after_end.state IS NULL THEN 1
-        WHEN before_start.state IS NULL AND after_end.state IS NULL THEN 2
+        WHEN before_start IS NOT NULL AND before_start.state IS NULL AND after_end IS NOT NULL AND after_end.state IS NULL THEN 1
+        WHEN before_start IS NOT NULL AND before_start.state IS NULL AND end.state IS NULL THEN 1
+        WHEN start.state IS NULL AND after_end IS NOT NULL AND after_end.state IS NULL THEN 2
         ELSE 0
         END AS openEndedVal
 
@@ -136,4 +136,4 @@ CALL {
 WITH candidate ORDER BY score DESC LIMIT 1
 SET candidate.state = $symbol
 
-// x-9
+// 8-x
