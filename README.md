@@ -1,6 +1,2 @@
-# Gomoku
-Cypher query outputting strategic moves in a game of Gomoku.
-
-## TODO
-
-- Ensure correct handling when there's no winning move left
+# Schuup
+A heuristic function for Gomoku (or 5-in-a-row), implemented as a Cypher query.
