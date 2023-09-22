@@ -19,7 +19,7 @@ CALL {
     MATCH p = (start) ((a)-->(b) WHERE a.row + 1 = b.row AND a.column + 1 = b.column){4} (end) 
     OPTIONAL MATCH (before_start)-->(start) WHERE before_start.row + 1 = start.row AND before_start.column + 1 = start.column
     OPTIONAL MATCH (end)-->(after_end) WHERE end.row + 1 = after_end.row AND end.column + 1 = after_end.column
-    RETURN p, start, end, before_start, after_end, 3 AS direction // digonal, left-to-right
+    RETURN p, start, end, before_start, after_end, 3 AS direction // diagonal, left-to-right
     UNION
     MATCH p = (start) ((a)-->(b) WHERE a.row + 1 = b.row AND a.column - 1 = b.column){4} (end) 
     OPTIONAL MATCH (before_start)-->(start) WHERE before_start.row + 1 = start.row AND before_start.column - 1 = start.column
