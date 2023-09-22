@@ -1,5 +1,4 @@
-# Team Schuup 5-in-a-row 
-Gustav and Lars
+# Team Schuup  
 
 ## Find all paths
 
@@ -31,7 +30,7 @@ WITH *
           all(node IN nodes(p) WHERE node.state IS NULL OR node.state <> $symbol) // exclude all paths that include both symbols since they cannot lead to victory
 ```
 
-Could have been done a lot nicer, and would have avoided several bugs, had I looked at the actual data model (relationships track it's direction). This snippet from Satia does the same thing, but better looking and faster:
+Could have been done a lot nicer, and would have avoided several bugs, had I looked at the actual data model (relationships track it's direction). This snippet from Satia Herfert does the same thing, but better looking and faster:
 
 ```
 MATCH p = (start:Cell)-[r1]->()-[r2]->()-[r3]->()-[r4]->(end)
@@ -56,7 +55,7 @@ WITH *,
 
 ## Now let's look for easy winning moves
 
-![Alt text](image-2.png)
+![Winning moves](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_006.gif)
 
 ```
 WITH *,
@@ -68,7 +67,7 @@ END AS isWinningMove, // 2 means it's my win, 1 means that opponent could win in
 
 ```
 
-![Alt text](image-1.png) 
+![Rows winnable in two moves](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_007.gif) 
 
 Open-ended paths are paths which could eventually become lethal 4-in-rows.
 
@@ -92,7 +91,7 @@ END AS isThreeWinningMove,
 
 ## What about forks?
 
-![Alt text](image-3.png) ![Alt text](image-4.png) ![Alt text](image-5.png)
+![Alt text](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_009.gif) ![Alt text](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_010.gif) ![Alt text](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_011.gif)
 
 ```
 CASE
