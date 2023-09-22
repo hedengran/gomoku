@@ -58,7 +58,8 @@ WITH *,
 ## Now let's look for easy winning moves
 
 > ![Winning moves](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_006.gif)
-_(source: [gomokuworld.com](http://gomokuworld.com/gomoku/1))_
+>
+> _(source: [gomokuworld.com](http://gomokuworld.com/gomoku/1))_
 
 ```
 WITH *,
@@ -70,8 +71,9 @@ END AS isWinningMove, // 2 means it's my win, 1 means that opponent could win in
 
 ```
 
-![Rows winnable in two moves](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_007.gif) 
-_(source: [gomokuworld.com](http://gomokuworld.com/gomoku/1))_
+> ![Rows winnable in two moves](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_007.gif) 
+> 
+> _(source: [gomokuworld.com](http://gomokuworld.com/gomoku/1))_
 
 Open-ended paths are paths which could eventually become lethal 4-in-rows.
 
@@ -95,8 +97,9 @@ END AS isThreeWinningMove,
 
 ## What about forks?
 
-![Alt text](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_009.gif) ![Alt text](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_010.gif) ![Alt text](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_011.gif)
-_(source: [gomokuworld.com](http://gomokuworld.com/gomoku/1))_
+> ![Alt text](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_009.gif) ![Alt text](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_010.gif) ![Alt text](http://gomokuworld.com/site/pictures/images/introduction_of_gomoku_011.gif)
+> 
+> _(source: [gomokuworld.com](http://gomokuworld.com/gomoku/1))_
 
 ```
 CASE
