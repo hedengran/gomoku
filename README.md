@@ -34,7 +34,7 @@ WITH *
 
 Could have been done a lot nicer, and would have avoided several bugs, had I looked at the actual data model (relationships track it's direction). This snippet from Satia Herfert does the same thing, but better looking and faster:
 
-```
+```cypher
 MATCH p = (start:Cell)-[r1]->()-[r2]->()-[r3]->()-[r4]->(end)
     WHERE r2.direction = r1.direction AND 
           r3.direction = r1.direction AND 
@@ -48,7 +48,7 @@ OPTIONAL MATCH (end)-[r5]->(after_end)
 
 ## A simple score
 
-```
+```cypher
 WITH *, 
     size([node IN nodes(p) WHERE node.state = $symbol]) AS myScore, 
     size([node IN nodes(p) WHERE node.state <> $symbol]) AS otherScore
@@ -61,7 +61,7 @@ WITH *,
 >
 > _(source: [gomokuworld.com](http://gomokuworld.com/gomoku/1))_
 
-```
+```cypher
 WITH *,
 CASE
     WHEN myScore = 4 THEN 2
@@ -77,7 +77,7 @@ END AS isWinningMove, // 2 means it's my win, 1 means that opponent could win in
 
 Open-ended paths are paths which could eventually become lethal 4-in-rows.
 
-```
+```cypher
 WITH *,
     CASE
     WHEN before_start IS NOT NULL AND before_start.state IS NULL AND end.state IS NULL THEN 1
@@ -87,7 +87,7 @@ WITH *,
 ```
 
 
-```
+```cypher
 CASE
     WHEN myScore = 3 AND ((openEnded = 1 AND candidate <> end) OR (openEnded = 2 AND candidate <> start)) THEN 2     
     WHEN otherScore = 3 AND ((openEnded = 1 AND candidate <> end) OR (openEnded = 2 AND candidate <> start)) THEN 1
@@ -101,7 +101,7 @@ END AS isThreeWinningMove,
 > 
 > _(source: [gomokuworld.com](http://gomokuworld.com/gomoku/1))_
 
-```
+```cypher
 CASE
     WHEN myScore = 3 THEN 1
     ELSE 0
@@ -122,7 +122,7 @@ END AS isOtherTwoMove
 
 ## Aggregating everything
 
-```
+```cypher
 WITH candidate, 
     direction,
     max(isWinningMove) AS maxIsWinningMove,
@@ -145,7 +145,7 @@ WITH candidate,
 
 ## Find forks
 
-```
+```cypher
 WITH *,
 CASE
     WHEN isMyThreeMoveSum >= 2 THEN 2
@@ -160,7 +160,7 @@ END AS isFork
 
 ## Find best move
 
-```
+```cypher
 WITH * ORDER BY isWinningMove DESC, isThreeWinningMove DESC, isFork DESC, score DESC 
 LIMIT 1
 RETURN candidate
